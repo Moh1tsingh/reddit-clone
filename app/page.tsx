@@ -49,7 +49,7 @@ export default function Home({searchParams}:{searchParams:{page:string}}) {
   return (
     <div className=" max-w-[1000px] mx-auto flex gap-x-10 mt-4 mb-10">
       <div className=" w-[65%] flex flex-col gap-y-5">
-        <CreatePostCard />
+        <CreatePostCard subName="" />
         <Suspense fallback={<SuspenseCard />} key={searchParams.page}>
           <ShowItems searchParams={searchParams} />
         </Suspense>
