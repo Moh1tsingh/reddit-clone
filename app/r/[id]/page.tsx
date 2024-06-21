@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { SaveButton, SubmitButton } from "@/app/components/SubmitButton";
 import { updateSubDescription } from "@/app/actions";
 import SubDescriptionFrom from "@/app/components/SubDescriptionFrom";
-import { Cake } from "lucide-react";
+import { Cake, FileQuestion } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import CreatePostCard from "@/app/components/CreatePostCard";
@@ -26,15 +26,19 @@ async function getData(name: string) {
       description: true,
       userId: true,
       posts: {
+        orderBy: {
+          createdAt: "desc",
+        },
         select: {
           title: true,
           imageString: true,
           id: true,
           textContent: true,
+          comments: true,
           Vote: {
             select: {
               userId: true,
-              voteType:true
+              voteType: true,
             },
           },
           User: {
@@ -56,23 +60,35 @@ async function page({ params }: { params: { id: string } }) {
   return (
     <div className=" max-w-[1000px] mx-auto flex gap-x-10 mt-4 mb-10">
       <div className=" w-[65%] flex flex-col gap-y-5">
-        <CreatePostCard />
-        {data?.posts.map((post) => (
-          <PostCard
-            id={post.id}
-            imageString={post.imageString}
-            jsonContent={post.textContent}
-            subName={data.name}
-            title={post.title}
-            userName={post.User?.userName as string}
-            key={post.id}
-            voteCount={post.Vote.reduce((acc, vote) => {
-              if (vote.voteType === "UP") return acc + 1;
-              if (vote.voteType === "DOWN") return acc - 1;
-              return acc;
-            }, 0)}
-          />
-        ))}
+        <CreatePostCard subName={params.id} />
+        {data?.posts.length === 0 ? (
+          <div className=" flex flex-col min-h-[300px] justify-center items-center rounded-md border border-dashed p-8 text-center">
+              <div className=" flex items-center justify-center size-20 rounded-full bg-primary/10">
+                <FileQuestion className=" size-10 text-primary"/>
+              </div>
+              <p className=" mt-6 text-xl font-semibold">No posts have been created yet.</p>
+          </div>
+        ) : (
+          <>
+            {data?.posts.map((post) => (
+              <PostCard
+                id={post.id}
+                imageString={post.imageString}
+                jsonContent={post.textContent}
+                subName={data.name}
+                title={post.title}
+                userName={post.User?.userName as string}
+                key={post.id}
+                commentCount={post.comments.length}
+                voteCount={post.Vote.reduce((acc, vote) => {
+                  if (vote.voteType === "UP") return acc + 1;
+                  if (vote.voteType === "DOWN") return acc - 1;
+                  return acc;
+                }, 0)}
+              />
+            ))}
+          </>
+        )}
       </div>
       <div className=" w-[35%] ">
         <Card>

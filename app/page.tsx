@@ -31,6 +31,11 @@ async function getData(searchParams:string) {
         },
       },
       Vote: true,
+      comments:{
+        select:{
+          id:true
+        }
+      }
     },
     orderBy: {
       createdAt: "desc",
@@ -89,6 +94,7 @@ async function ShowItems({ searchParams }: { searchParams: { page: string } }) {
       {data.map((post) => {
         return (
           <PostCard
+
             id={post.id}
             imageString={post.imageString}
             jsonContent={post.textContent}
@@ -101,6 +107,7 @@ async function ShowItems({ searchParams }: { searchParams: { page: string } }) {
               return acc;
             }, 0)}
             key={post.id}
+            commentCount={post.comments.length}
           />
         );
       })}

@@ -49,7 +49,7 @@ export async function createCommunity(prevData: any, formData: FormData) {
         userId: user.id,
       },
     });
-    return redirect("/");
+    return redirect(`/r/${data.name}`);
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
@@ -96,55 +96,54 @@ export async function createPost(
   const subName = formData.get("subName") as string;
   const imageUrl = formData.get("imageUrl") as string | null;
 
-  await prisma.post.create({
+  const data = await prisma.post.create({
     data: {
       title,
       imageString: imageUrl ?? undefined,
       subName,
       userId: user.id,
       textContent: jsonContent ?? undefined,
-
     },
   });
-  return redirect("/");
+  return redirect(`/post/${data.id}`);
 }
 
-export async function handleVote(formData:FormData){
-  const {getUser} = getKindeServerSession()
-  const user = await getUser()
+export async function handleVote(formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
-  if(!user) return redirect("/api/auth/login")
+  if (!user) return redirect("/api/auth/login");
 
-  const postId = formData.get("postId") as string
+  const postId = formData.get("postId") as string;
   const voteDirection = formData.get("voteDirection") as TypeOfVote;
 
   const vote = await prisma.vote.findFirst({
-    where:{
+    where: {
       postId,
-      userId:user.id
-    }
-  })
+      userId: user.id,
+    },
+  });
 
-  if(vote){
-    if(vote.voteType === voteDirection){
+  if (vote) {
+    if (vote.voteType === voteDirection) {
       await prisma.vote.delete({
-        where:{
-          id:vote.id
-        }
-      })
-      return revalidatePath("/")
-    }else{
-      await prisma.vote.update({
-        where:{
-          id:vote.id
+        where: {
+          id: vote.id,
         },
-        data:{
-          voteType:voteDirection
-        }
-      })
+      });
+      return revalidatePath("/");
+    } else {
+      await prisma.vote.update({
+        where: {
+          id: vote.id,
+        },
+        data: {
+          voteType: voteDirection,
+        },
+      });
       return revalidatePath("/");
     }
-  }else{
+  } else {
     await prisma.vote.create({
       data: {
         postId,
@@ -154,7 +153,27 @@ export async function handleVote(formData:FormData){
     });
     return revalidatePath("/");
   }
+}
 
+export async function createComment(formData:FormData){
+  const {getUser} = getKindeServerSession()
+  const user = await getUser()
+  if(!user) return redirect("/api/auth/login")
   
+  try {
+    const postId = formData.get("postId") as string;
+    const text = formData.get("comment") as string;
 
+    const data = await prisma.comment.create({
+      data: {
+        postId,
+        userId: user.id,
+        text,
+      },
+    });
+    return revalidatePath(`/post/${postId}`);
+  } catch (error) {
+    console.log(error)
+  }
+  
 }

@@ -10,12 +10,12 @@ import { ImageDown, Link2 } from "lucide-react";
 
 
 
-async function CreatePostCard() {
+async function CreatePostCard({subName}:{subName:string}) {
 
   return (
     <Card className=" px-4 py-2 flex items-center gap-x-4">
       <Image src={pfp} alt={"pfp"} className=" h-12 w-fit" />
-      <Link href={"/r/dump/create"} className="w-full">
+      <Link href={`/r/${subName}/create`} className="w-full">
         <Input placeholder="Create your post" />
       </Link>
       <div className=" flex items-center gap-x-3">

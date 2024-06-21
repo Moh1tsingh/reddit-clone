@@ -18,6 +18,7 @@ interface iAppsProps {
   id: string;
   voteCount: number;
   userName: string;
+  commentCount:number
 }
 
 function PostCard({
@@ -28,6 +29,7 @@ function PostCard({
   title,
   userName,
   voteCount,
+  commentCount
 }: iAppsProps) {
   return (
     <Card className=" flex relative overflow-hidden">
@@ -54,12 +56,12 @@ function PostCard({
           </p>
         </div>
         <div className="px-2">
-          <Link href={"/"}>
+          <Link href={`/post/${id}`}>
             <h1 className=" font-medium text-lg mt-1 ">{title}</h1>
           </Link>
         </div>
         <div className=" max-h-[300px] overflow-hidden">
-          {imageString ?(
+          {imageString ? (
             <Image
               src={imageString}
               alt="Post Image"
@@ -67,13 +69,15 @@ function PostCard({
               height={300}
               className=" w-full h-full"
             />
-          ):(<RenderToJson data={jsonContent}/>)}
+          ) : (
+            <RenderToJson data={jsonContent} />
+          )}
         </div>
         <div className="m-3 flex items-center gap-x-5">
           <div className=" flex gap-x-1  items-center">
             <MessageCircle className="size-4 text-muted-foreground" />
             <p className=" font-medium text-muted-foreground text-xs">
-              30 Comments
+              {commentCount} Comments
             </p>
           </div>
           <CopyLink id={id} />

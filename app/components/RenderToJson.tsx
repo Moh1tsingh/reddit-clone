@@ -25,8 +25,8 @@ const handlers: NodeHandlers = {
 
 function RenderToJson({ data }: { data: any }) {
   return (
-    <div className=" px-3 prose">
-      <TipTapRender handlers={handlers} node={data} />
+    <div className=" px-3 prose dark:prose-invert">
+      <TipTapRender handlers={handlers} node={data ? data : ""} />
     </div>
   );
 }
