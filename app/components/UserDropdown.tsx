@@ -23,7 +23,7 @@ export default function UserDropdown({ UserImg}:iAppsProps) {
           <MenuIcon className=" size-6 lg:size-5" />
           <Image
             src={
-              UserImg ??
+              UserImg ? UserImg :
               "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
             }
             alt="avatar"
