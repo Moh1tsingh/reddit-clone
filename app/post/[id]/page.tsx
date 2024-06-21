@@ -14,7 +14,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
+import { unstable_noStore as noStore } from "next/cache";
+
 async function getData(id: string) {
+  noStore();
   const data = await prisma.post.findUnique({
     where: {
       id,

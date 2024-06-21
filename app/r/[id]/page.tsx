@@ -5,9 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Textarea } from "@/components/ui/textarea";
-import { SaveButton, SubmitButton } from "@/app/components/SubmitButton";
-import { updateSubDescription } from "@/app/actions";
 import SubDescriptionFrom from "@/app/components/SubDescriptionFrom";
 import { Cake, FileQuestion } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -15,7 +12,10 @@ import { Button } from "@/components/ui/button";
 import CreatePostCard from "@/app/components/CreatePostCard";
 import PostCard from "@/app/components/PostCard";
 
+import { unstable_noStore as noStore } from "next/cache";
+
 async function getData(name: string) {
+  noStore();
   const data = await prisma.subreddit.findUnique({
     where: {
       name: name,
