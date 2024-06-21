@@ -16,7 +16,7 @@ const initailState = {
   status: "",
 };
 
-function page() {
+function Page() {
   const [state, formAction] = useFormState(createCommunity, initailState);
 
   return (
@@ -56,4 +56,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

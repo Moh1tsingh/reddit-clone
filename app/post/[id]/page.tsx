@@ -121,7 +121,7 @@ async function page({ params }: { params: { id: string } }) {
               {data.comments.map((comment) => (
                 <div key={comment.id} className="flex flex-col">
                     <div className=" flex items-center  gap-x-3 ">
-                      <img
+                      <Image
                         src={
                           comment.User?.imageUrl
                             ? comment.User?.imageUrl

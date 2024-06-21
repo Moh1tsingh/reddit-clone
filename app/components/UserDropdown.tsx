@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { MenuIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -20,7 +21,7 @@ export default function UserDropdown({ UserImg}:iAppsProps) {
       <DropdownMenuTrigger>
         <div className=" rounded-xl border p-2 lg:px-4 lg:py-2 flex items-center gap-x-3">
           <MenuIcon className=" size-6 lg:size-5" />
-          <img
+          <Image
             src={
               UserImg ??
               "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
