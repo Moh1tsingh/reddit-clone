@@ -16,7 +16,7 @@ const initailState = {
   status:""
 }
 
-export default function ({ username }: { username: string }) {
+export default function SettingsForm({ username }: { username: string }) {
   const [userName, setUserName] = useState("");
   const [state,formAction] = useFormState( updateUsername ,initailState)
   const {toast} = useToast()

@@ -53,7 +53,7 @@ async function getData(name: string) {
   return data;
 }
 
-async function page({ params }: { params: { id: string } }) {
+async function Page({ params }: { params: { id: string } }) {
   const data = await getData(params.id);
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -143,4 +143,4 @@ async function page({ params }: { params: { id: string } }) {
   );
 }
 
-export default page;
+export default Page;

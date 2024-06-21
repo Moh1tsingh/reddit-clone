@@ -38,7 +38,7 @@ const rules = [
   },
 ];
 
-function page({ params }: { params: { id: string } }) {
+function Page({ params }: { params: { id: string } }) {
   const [imageUrl, SetImageUrl] = useState<string | null>(null);
   const [json, SetJson] = useState<null | JSONContent>(null);
   const [title, SetTitle] = useState<string | null>(null);
@@ -147,4 +147,4 @@ function page({ params }: { params: { id: string } }) {
   );
 }
 
-export default page;
+export default Page;
