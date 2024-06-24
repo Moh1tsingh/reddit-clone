@@ -8,11 +8,45 @@ import Link from "next/link";
 import CreatePostCard from "./components/CreatePostCard";
 import prisma from "./lib/db";
 import PostCard from "./components/PostCard";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import SuspenseCard from "./components/SuspenseCard";
 import Pagination from "./components/Pagination";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { unstable_noStore as noStore } from "next/cache";
+
+async function GetSubData(){
+  noStore();
+  const subData = await prisma.subreddit.findMany({});
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Create Post</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Choose Community</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup >
+          {subData.map((sub)=>{
+            return (
+              <DropdownMenuRadioItem key={sub.id} value={sub.name}>
+                <Link href={`/r/${sub.name}/create`}>r/{sub.name}</Link>
+              </DropdownMenuRadioItem>
+            );
+})}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 async function getData(searchParams:string) {
   noStore()
@@ -75,9 +109,10 @@ export default function Home({searchParams}:{searchParams:{page:string}}) {
             </p>
             <Separator className="my-5" />
             <div className=" flex w-full flex-col gap-y-3">
-              <Button variant={"secondary"} asChild>
+              {/* <Button variant={"secondary"} asChild>
                 <Link href={"/r/dump/create"}>Create Post</Link>
-              </Button>
+              </Button> */}
+              <GetSubData/>
               <Button asChild>
                 <Link href={"/r/create"}>Create Community</Link>
               </Button>

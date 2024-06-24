@@ -62,13 +62,15 @@ function PostCard({
         </div>
         <div className=" max-h-[300px] overflow-hidden">
           {imageString ? (
-            <Image
-              src={imageString}
-              alt="Post Image"
-              width={625}
-              height={300}
-              className=" w-full h-full"
-            />
+            <Link href={`/post/${id}`}>
+              <Image
+                src={imageString}
+                alt="Post Image"
+                width={625}
+                height={300}
+                className=" w-full h-full"
+              />
+            </Link>
           ) : (
             <RenderToJson data={jsonContent} />
           )}

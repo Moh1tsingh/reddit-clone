@@ -28,6 +28,8 @@ export default function UserDropdown({ UserImg}:iAppsProps) {
             }
             alt="avatar"
             className=" rounded-full size-7 hidden lg:block"
+            width={40}
+            height={40}
           />
         </div>
       </DropdownMenuTrigger>

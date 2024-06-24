@@ -123,23 +123,25 @@ async function page({ params }: { params: { id: string } }) {
             <div className=" flex flex-col gap-y-7">
               {data.comments.map((comment) => (
                 <div key={comment.id} className="flex flex-col">
-                    <div className=" flex items-center  gap-x-3 ">
-                      <Image
-                        src={
-                          comment.User?.imageUrl
-                            ? comment.User?.imageUrl
-                            : "comment.User?.imageUrl"
-                        }
-                        alt=""
-                        className=" size-7 rounded-full"
-                      />
-                      <h3 className=" text-sm font-medium tracking-tight">
-                        u/{comment.User?.userName}
-                      </h3>
-                    </div>
-                    <p className=" ml-10 text-secondary-foreground text-sm tracking-wide">
-                      {comment.text}
-                    </p>
+                  <div className=" flex items-center  gap-x-3 ">
+                    <Image
+                      src={
+                        comment.User?.imageUrl
+                          ? comment.User?.imageUrl
+                          : "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
+                      }
+                      alt=""
+                      className=" size-7 rounded-full"
+                      width={40}
+                      height={40}
+                    />
+                    <h3 className=" text-sm font-medium tracking-tight">
+                      u/{comment.User?.userName}
+                    </h3>
+                  </div>
+                  <p className=" ml-10 text-secondary-foreground text-sm tracking-wide">
+                    {comment.text}
+                  </p>
                 </div>
               ))}
             </div>

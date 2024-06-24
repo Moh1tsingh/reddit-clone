@@ -10,7 +10,7 @@ function CommentsSection({postId}:{postId:string}) {
   return (
     <form action={async (formData)=>{ await createComment(formData); ref.current?.reset()}} className="mt-5 " ref={ref}>
       <input type="hidden" name="postId" value={postId} />
-      <Label>Comment as {}</Label>
+      <Label>Comment as yourself</Label>
       <Textarea
         placeholder="What are your thoughts?"
         className=" w-full mt-1 mb-2"
