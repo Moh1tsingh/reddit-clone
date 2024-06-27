@@ -112,7 +112,11 @@ export async function handleVote(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user) return redirect("/api/auth/login");
+  if (!user) return redirect(
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/api/auth/login"
+      : "https://reddit-clone-deployment.vercel.app/api/auth/login"
+  );
 
   const postId = formData.get("postId") as string;
   const voteDirection = formData.get("voteDirection") as TypeOfVote;
