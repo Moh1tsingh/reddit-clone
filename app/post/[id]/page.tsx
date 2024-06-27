@@ -72,10 +72,10 @@ async function getData(id: string) {
 async function page({ params }: { params: { id: string } }) {
   const data = await getData(params.id);
   return (
-    <div className=" max-w-[1000px] mx-auto flex gap-x-10 mt-4 mb-10">
-      <div className=" w-[70%] flex flex-col gap-y-5">
-        <Card className=" p-2 flex">
-          <div className=" flex flex-col items-center gap-y-2 p-2">
+    <div className=" max-w-[1000px] mx-auto flex  gap-x-10 mt-4 mb-10 max-sm:flex-col max-sm:p-4 max-sm:gap-y-3">
+      <div className=" w-[70%] max-sm:w-full flex flex-col gap-y-5">
+        <Card className=" p-2 flex max-sm:p-0">
+          <div className=" flex flex-col items-center gap-y-2 p-2 max-sm:p-1 max-sm:bg-muted">
             <form action={handleVote}>
               <input type="hidden" name="voteDirection" value={"UP"} />
               <input type="hidden" name="postId" value={data.id} />
@@ -148,7 +148,7 @@ async function page({ params }: { params: { id: string } }) {
           </div>
         </Card>
       </div>
-      <div>
+      <div className=" w-[30%] max-sm:w-full">
         <Card>
           <div className=" bg-muted font-semibold p-4">About Community</div>
           <div className=" p-4 flex gap-x-3 items-center">

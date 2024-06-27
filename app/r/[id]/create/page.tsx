@@ -45,8 +45,8 @@ function Page({ params }: { params: { id: string } }) {
   const createPostReddit = createPost.bind( null, {jsonContent:json} )
 
   return (
-    <div className=" max-w-[1000px] mx-auto flex gap-x-10 mt-4">
-      <div className=" w-[65%] flex flex-col gap-y-5">
+    <div className=" max-w-[1000px] mx-auto flex gap-x-10 mt-4 max-sm:p-4 ">
+      <div className=" w-[65%] flex flex-col gap-y-5 max-sm:w-full">
         <h1 className=" font-semibold">
           Subreddit:
           <Link href={`/r/${params.id}`} className=" text-primary">
@@ -122,7 +122,7 @@ function Page({ params }: { params: { id: string } }) {
           </TabsContent>
         </Tabs>
       </div>
-      <div className=" w-[35%]">
+      <div className=" w-[35%] max-sm:hidden">
         <Card className="flex flex-col p-4">
           <div className=" flex items-center gap-x-2">
             <Image className=" size-10" src={pfp} alt="pfp" />

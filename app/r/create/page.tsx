@@ -20,7 +20,7 @@ function Page() {
   const [state, formAction] = useFormState(createCommunity, initailState);
 
   return (
-    <div className=" max-w-[1000px] mx-auto flex flex-col mt-4">
+    <div className=" max-w-[1000px] mx-auto flex flex-col mt-4 max-sm:p-4">
       <form action={formAction}>
         <h1 className=" text-3xl font-extrabold tracking-tight text-primary">
           Create Community

@@ -84,14 +84,14 @@ return {data,count};
 
 export default function Home({searchParams}:{searchParams:{page:string}}) {
   return (
-    <div className=" max-w-[1000px] mx-auto flex gap-x-10 mt-4 mb-10">
-      <div className=" w-[65%] flex flex-col gap-y-5">
+    <div className=" max-w-[1000px] mx-auto flex gap-x-10 mt-4 mb-10 max-sm:p-4">
+      <div className=" w-[65%] max-sm:w-full flex flex-col gap-y-5">
         <CreatePostCard subName="" />
         <Suspense fallback={<SuspenseCard />} key={searchParams.page}>
           <ShowItems searchParams={searchParams} />
         </Suspense>
       </div>
-      <div className="w-[35%]">
+      <div className="w-[35%] max-sm:hidden">
         <Card>
           <Image src={banner} alt="banner" />
           <div className="p-2">

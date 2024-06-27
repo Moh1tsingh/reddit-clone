@@ -58,15 +58,17 @@ async function Page({ params }: { params: { id: string } }) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   return (
-    <div className=" max-w-[1000px] mx-auto flex gap-x-10 mt-4 mb-10">
-      <div className=" w-[65%] flex flex-col gap-y-5">
+    <div className=" max-w-[1000px] mx-auto flex gap-x-10 mt-4 mb-10 max-sm:flex-col max-sm:p-4 max-sm:gap-y-3">
+      <div className=" w-[65%] flex flex-col gap-y-5 max-sm:w-full ">
         <CreatePostCard subName={params.id} />
         {data?.posts.length === 0 ? (
           <div className=" flex flex-col min-h-[300px] justify-center items-center rounded-md border border-dashed p-8 text-center">
-              <div className=" flex items-center justify-center size-20 rounded-full bg-primary/10">
-                <FileQuestion className=" size-10 text-primary"/>
-              </div>
-              <p className=" mt-6 text-xl font-semibold">No posts have been created yet.</p>
+            <div className=" flex items-center justify-center size-20 rounded-full bg-primary/10">
+              <FileQuestion className=" size-10 text-primary" />
+            </div>
+            <p className=" mt-6 text-xl font-semibold">
+              No posts have been created yet.
+            </p>
           </div>
         ) : (
           <>
@@ -90,7 +92,7 @@ async function Page({ params }: { params: { id: string } }) {
           </>
         )}
       </div>
-      <div className=" w-[35%] ">
+      <div className=" w-[35%] max-sm:w-full ">
         <Card>
           <div className=" bg-muted font-semibold p-4">About Community</div>
           <div className=" p-4 flex gap-x-3 items-center">

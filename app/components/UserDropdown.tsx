@@ -39,11 +39,11 @@ export default function UserDropdown({ UserImg}:iAppsProps) {
             Create Community
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        {/* <DropdownMenuItem>
           <Link className="w-full" href={"/create"}>
             Create Post
           </Link>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuItem>
           <Link className="w-full" href={"/settings"}>
             Settings
